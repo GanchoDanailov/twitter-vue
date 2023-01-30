@@ -56,7 +56,14 @@
         @click:append-inner="visible = !visible"
       ></v-text-field>
 
-      <v-btn block class="mb-8" color="black" size="large" rounded="pill">
+      <v-btn
+        block
+        class="mb-8"
+        color="black"
+        size="large"
+        rounded="pill"
+        @click="login"
+      >
         Log In
       </v-btn>
 
@@ -74,6 +81,7 @@
 </template>
 
 <script>
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 export default {
   data() {
     return {
@@ -86,6 +94,24 @@ export default {
       ],
       passwordRules: [(v) => !!v || "Password is required"],
     };
+  },
+  methods: {
+    async login() {
+      console.log(this.email);
+      console.log(this.password);
+      const auth = getAuth();
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          this.email,
+          this.password
+        );
+        console.log("success", userCredential.user);
+        this.$router.push("/");
+      } catch (e) {
+        console.log("error", e);
+      }
+    },
   },
 };
 </script>

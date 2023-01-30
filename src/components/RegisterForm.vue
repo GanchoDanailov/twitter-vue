@@ -72,7 +72,14 @@
         :rules="confirmPasswordRules"
       ></v-text-field>
 
-      <v-btn block class="mb-8" color="black" size="large" rounded="pill">
+      <v-btn
+        block
+        class="mb-8"
+        color="black"
+        size="large"
+        rounded="pill"
+        @click="register"
+      >
         Register
       </v-btn>
     </v-card>
@@ -80,6 +87,8 @@
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 export default {
   data() {
     return {
@@ -102,6 +111,24 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    async register() {
+      console.log(this.email);
+      console.log(this.password);
+      const auth = getAuth();
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          this.email,
+          this.password
+        );
+        console.log("success", userCredential.user);
+        this.$router.push("/");
+      } catch (e) {
+        console.log("error", e);
+      }
+    },
   },
 };
 </script>
