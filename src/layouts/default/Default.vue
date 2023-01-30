@@ -1,29 +1,43 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer">
-      <v-card class="mx-auto" max-width="300">
-        <v-list>
+    <v-navigation-drawer v-model="drawer" class="pl-8">
+      <v-btn
+        class="ma-2"
+        variant="text"
+        icon="mdi-twitter"
+        size="x-large"
+        color="blue-lighten-2"
+      ></v-btn>
 
-          <v-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary" variant="plain">
-            <template v-slot:prepend>
-              <v-icon :icon="item.icon"></v-icon>
-            </template>
+      <div class="d-flex flex-column">
+        <router-link to="/" class="d-flex align-center text-black mb-3">
+          <v-icon size="x-large" icon="mdi-home-heart"></v-icon>
+          <span class="ml-5 text-h6">Home</span>
+        </router-link>
 
-            <v-list-item-title v-text="item.text"></v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-card>
+        <!-- <router-link to="/about" class="d-flex align-center text-black mb-3">
+          <v-icon size="x-large" icon="mdi-pound"></v-icon>
+          <span class="ml-5 text-h6">Explore</span>
+        </router-link> -->
+
+        <router-link to="/login" class="d-flex align-center text-black mb-3">
+          <v-icon size="x-large" icon="mdi-login-variant"></v-icon>
+          <span class="ml-5 text-h6">Login</span>
+        </router-link>
+
+        <router-link to="/register" class="d-flex align-center text-black mb-3">
+          <v-icon size="x-large" icon="mdi-account-plus-outline"></v-icon>
+          <span class="ml-5 text-h6">Register</span>
+        </router-link>
+      </div>
     </v-navigation-drawer>
 
     <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Tvvitter</v-toolbar-title>
+      <v-toolbar-title @click="drawer = !drawer">Twitter</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-
-
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -32,10 +46,16 @@
 export default {
   data: () => ({
     drawer: null,
-    items: [
-      { text: 'Home', icon: 'mdi-account' },
-      { text: 'Contact', icon: 'mdi-flag' },
-    ],
   }),
-}
+};
 </script>
+<style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
+.router-link-exact-active {
+  span {
+    font-weight: 900;
+  }
+}
+</style>
