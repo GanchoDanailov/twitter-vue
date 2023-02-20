@@ -24,12 +24,12 @@
 
 
 <script>
-import NavigationMenu from "@/components/NavigationMenu";
+import NavigationMenu from '@/components/NavigationMenu'
 
 export default {
   data: () => ({
     drawer: null,
   }),
   components: { NavigationMenu },
-};
+}
 </script>

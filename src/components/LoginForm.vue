@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 export default {
   data() {
     return {
@@ -89,29 +89,29 @@ export default {
       email: null,
       password: null,
       emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+        (v) => !!v || 'E-mail is required',
+        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
-      passwordRules: [(v) => !!v || "Password is required"],
-    };
+      passwordRules: [(v) => !!v || 'Password is required'],
+    }
   },
   methods: {
     async login() {
-      console.log(this.email);
-      console.log(this.password);
-      const auth = getAuth();
+      console.log(this.email)
+      console.log(this.password)
+      const auth = getAuth()
       try {
         const userCredential = await signInWithEmailAndPassword(
           auth,
           this.email,
           this.password
-        );
-        console.log("success", userCredential.user);
-        this.$router.push("/");
+        )
+        console.log('success', userCredential.user)
+        this.$router.push('/')
       } catch (e) {
-        console.log("error", e);
+        console.log('error', e)
       }
     },
   },
-};
+}
 </script>

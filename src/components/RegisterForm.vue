@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
 export default {
   data() {
@@ -97,38 +97,38 @@ export default {
       password: null,
       confirmPassword: null,
       emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+        (v) => !!v || 'E-mail is required',
+        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
-      passwordRules: [(v) => !!v || "Password is required"],
+      passwordRules: [(v) => !!v || 'Password is required'],
       confirmPasswordRules: [
-        (value) => !!value || "Confirm password is required",
+        (value) => !!value || 'Confirm password is required',
         (value) => {
           return (
             value === this.password ||
-            "The password confirmation does not match."
-          );
+            'The password confirmation does not match.'
+          )
         },
       ],
-    };
+    }
   },
   methods: {
     async register() {
-      console.log(this.email);
-      console.log(this.password);
-      const auth = getAuth();
+      console.log(this.email)
+      console.log(this.password)
+      const auth = getAuth()
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           this.email,
           this.password
-        );
-        console.log("success", userCredential.user);
-        this.$router.push("/");
+        )
+        console.log('success', userCredential.user)
+        this.$router.push('/')
       } catch (e) {
-        console.log("error", e);
+        console.log('error', e)
       }
     },
   },
-};
+}
 </script>
